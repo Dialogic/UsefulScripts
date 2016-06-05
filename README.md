@@ -1,19 +1,23 @@
 # UsefulScripts
 This is a collection of tools and scripts that can be used to monitor, administrate or troubleshoot your Dialogic PowerMedia XMS platform.
 
-This can be obtained directly from you XMS shell buy executing
+## Obtaining the scripts
+A zip file with the latest version of the scripts can always be found at https://github.com/Dialogic/UsefulScripts/archive/master.zip
+or checked out via git from https://github.com/Dialogic/UsefulScripts.git
+
+This can be obtained directly from you XMS shell by executing
 ``` bash
 wget https://github.com/Dialogic/UsefulScripts/archive/master.zip
 ```
-or checked out via git from https://github.com/Dialogic/UsefulScripts.git
 
 Individual scripts can be accessed directly
 ``` bash
 wget  https://raw.githubusercontent.com/Dialogic/UsefulScripts/master/xmsinfo.sh
 ```
-___
+_Note: After downloading or extracting the files you may need to change the permissions of the files before they can be executed via the `chmod +x *.sh`_
+
+
 ## Script details
-___
 ### xmsinfo.sh
 This bash script can be used to collect system level information and logs.  It is used to gather and review data for debugging issues with the XMS services or the OS environment.
 
