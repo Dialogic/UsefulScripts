@@ -11,7 +11,7 @@ function onExit() {
     echo "Exit Trap Received"
     echo "Generating final tgz monitor-$starttime-final.tgz"
 	sar -A > sar-output.txt
-    tar cvzf monitor-$starttime-final.tgz *-output.txt
+    tar cvzf "monitor-$starttime-final.tgz" *-output.txt
     echo 'Clearing temp files'
        rm -f tmptop.txt
        rm -f tmpps.txt
@@ -45,7 +45,7 @@ do
        rm -f meters-output.txt
        rm -f topthreads-output.txt
        
-       starttime=`date +"%y-%m-%d_%H:%M:%S.%3N"`
+       starttime=`date +"%y_%m_%d-%H_%M_%S.%3N"`
        hostname=`hostname`
        
        while [ $LOOPCOUNTER -lt $COUNTTILLZIP ]; do
@@ -54,7 +54,7 @@ do
        looptimestamp=`date +"%y-%m-%d_%H:%M:%S.%3N"`
        echo -e $looptimestamp "-" $hostname [$LOOPCOUNTER out of $COUNTTILLZIP]"\n"
        echo -e "\nDisk/Mem Usage:"
-       echo -e "\t" | free -m
+         free -m
        #echo -e "\n"
        # df
        #echo -e "\n\n\nUptime:" `uptime`
@@ -67,45 +67,45 @@ do
 	    ps -A  -Lo %cpu,pid,lwp,comm=,args >> tmpps.txt
 	    
         echo -e "\n\nCPU Intensive Threads"
-	    echo -e "\t" | grep '^ *[0-9][0-9][0-9]\.' tmpps.txt
-        echo -e "\t" | grep '^ *[2-9][0-9]\.' tmpps.txt
-        echo -e "\t" | echo -e "\n\nTop Info:"
-        echo -e "\t" | grep Cpu tmptop.txt 
-        echo -e "\t" | grep Mem: tmptop.txt
-        echo -e "\t" | grep Swap: tmptop.txt
+	      grep '^ *[0-9][0-9][0-9]\.' tmpps.txt
+          grep '^ *[2-9][0-9]\.' tmpps.txt
+          echo -e "\n\nTop Info:"
+          grep Cpu tmptop.txt 
+          grep Mem: tmptop.txt
+          grep Swap: tmptop.txt
 	    echo -e "\n"
-	    echo -e "\t" | grep PID tmptop.txt
-        echo -e "\t" | grep ssp tmptop.txt
-        echo -e "\t" | grep appmanager tmptop.txt
-        echo -e "\t" | grep xmserver tmptop.txt
+	      grep PID tmptop.txt
+          grep ssp tmptop.txt
+          grep appmanager tmptop.txt
+          grep xmserver tmptop.txt
         
         #these can be commended out based on tech used
-        echo -e "\t" | grep msml tmptop.txt
-        echo -e "\t" | grep vxml tmptop.txt
-        echo -e "\t" | grep rest tmptop.txt
-        echo -e "\t" | grep netann tmptop.txt
+          grep msml tmptop.txt
+          grep vxml tmptop.txt
+          grep rest tmptop.txt
+          grep netann tmptop.txt
         
-        echo -e "\t" | grep httpclient tmptop.txt
+          grep httpclient tmptop.txt
 
         #used by mrb/lb
-        #echo -e "\t" | grep java tmptop.txt
+        #  grep java tmptop.txt
         
         #Alternatively you can use
         #top -n 1 -b | head -20
 
 	    
         echo -e "\n\nMeters(if available):"
-        echo -e "\t" | grep xmsRtpSessions /var/lib/xms/meters/currentValue.txt
-        echo -e "\t" | grep xmsSignalingSessions /var/lib/xms/meters/currentValue.txt
-        echo -e "\t" | grep calls.active /var/lib/xms/meters/currentValue.txt
-        echo -e "\t" | grep xmsMediaTransactions /var/lib/xms/meters/currentValue.txt
+          grep xmsRtpSessions /var/lib/xms/meters/currentValue.txt
+          grep xmsSignalingSessions /var/lib/xms/meters/currentValue.txt
+          grep calls.active /var/lib/xms/meters/currentValue.txt
+          grep xmsMediaTransactions /var/lib/xms/meters/currentValue.txt
 #        grep xmsLicenseUsage /var/lib/xms/meters/currentValue.txt
 
 #	mpstat -P ALL 1 | tee mpstats.txt
 
         if [[ -f tmp-network.txt ]] ;
         then
-            echo -e "\n\nNetwork Error count:" `wc -l tmp-network.txt` "\n"
+            echo -e "\n\nNetwork Error count:" `cat tmp-network.txt | wc -l ` "\n"
             #cat tmp-network.txt >> networkerror-output.txt
             cat /dev/null > tmp-network.txt
         fi
@@ -135,7 +135,7 @@ do
 
 	sar -A > sar-output.txt
 
-    tar cvzf monitor-$starttime.tgz *-output.txt
+    tar cvzf "monitor-$starttime.tgz" *-output.txt
     #delete files over 7 days old   
     find . -name 'monitor-*.tgz' -mtime +7 -delete
 done
