@@ -1,6 +1,19 @@
 # UsefulScripts
-This is a collection of tools and scripts that can be used to monitor, administrate or troubleshoot your Dialogic PowerMedia XMS platform
+This is a collection of tools and scripts that can be used to monitor, administrate or troubleshoot your Dialogic PowerMedia XMS platform.
 
+This can be obtained directly from you XMS shell buy executing
+``` bash
+wget https://github.com/Dialogic/UsefulScripts/archive/master.zip
+```
+or checked out via git from https://github.com/Dialogic/UsefulScripts.git
+
+Individual scripts can be accessed directly
+``` bash
+wget  https://raw.githubusercontent.com/Dialogic/UsefulScripts/master/xmsinfo.sh
+```
+___
+## Script details
+___
 ### xmsinfo.sh
 This bash script can be used to collect system level information and logs.  It is used to gather and review data for debugging issues with the XMS services or the OS environment.
 
@@ -83,3 +96,32 @@ Usage:
 ``` bash
 xms# ./cacheClearandDisable.sh
 ```
+
+### monitor.sh
+This bash script can be used to monitor system level and XMS level resources.  It is useful for monitoring systems in case of failure conditions and to capture performance and environmental data.
+
+This can be used to log information over a long period of time or to simply view the information via the terminal.
+
+Information gathered and displayed on screen each loop:
+- System memory/CPU/disk space
+- Several XMS meters (SipSessions, RTP sessions, lic counters)
+- High CPU usage threads and processes
+- Top information for XMS internal processes
+- Network 4xx/5xx error counters
+
+Additional detailed information will be saved in the "xxxx-output.txt" files that can be reviewed for historical data.
+
+The screen output will be updated every 15seconds and the historical data files will be compressed to a tgz file every 240 loops (240x15=3600seconds or 1 h).  This timing can be changed by modifying the `COUNTTILLZIP=240` and `SLEEPTIME=15` at the top of the script.
+
+_Note: It is recommended that this script be run with root access either as root account or via sudo_
+
+Usage:
+``` bash
+xms# ./monitor.sh
+```
+to run in the background
+``` bash
+xms# nohup ./monitor.sh > /dev/null &
+```
+
+Sample output:
