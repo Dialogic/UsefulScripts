@@ -9,9 +9,18 @@ _Note: Is is recommended that this script be run with root access either as root
 By default it will create a tgz in the local directory named xmsinfo-YYY-MM-DD_hh-mm-ss.tgz, but a different location/path can be passed in via command line argument
 
 Usage:
-```sh
-xms# xmsinfo.sh  
+``` bash
+xms# ./xmsinfo.sh  
 ```
+or
+``` bash
+xms# ./xmsinfo.sh /path/to/myfilename.tgz  
+```
+or
+``` bash
+xms$ sudo ./xmsinfo.sh
+```
+
 This script will collect the following and save it in additionalinfo.out
 + Network configuration (ip address, firewall, port usage)
 + System information (OS version, CPU info, Mem)
@@ -22,5 +31,3 @@ This script will collect the following and save it in additionalinfo.out
 The script will also export the data in the xmsWebUI and store it in webuiinfo.out, and will also detect and list out saved media files and cache information into mediafileinfo.out
 
 It will package the above with all the xms config files, lic information, XMS logs, HMP(media core) logs and system message logs into the tgz
-
- 
