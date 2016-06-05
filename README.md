@@ -31,3 +31,27 @@ This script will collect the following and save it in additionalinfo.out
 The script will also export the data in the xmsWebUI and store it in webuiinfo.out, and will also detect and list out saved media files and cache information into mediafileinfo.out
 
 It will package the above with all the xms config files, lic information, XMS logs, HMP(media core) logs and system message logs into the tgz
+
+### gracefulShutdown.sh
+This tool can be used to begin a graceful shutdown of the XMS services.  
+
+By default the graceful shutdown timer is set to 6 mins, but this line `SHUTDOWNTIMER=360` in the script can be changed to the desired values
+
+The `gracefulShutdown.log` will contain the details from the script execution.
+
+Usage:
+``` bash
+xms# ./gracefulShutdown.sh  
+```
+
+### gracefulRestart.sh
+This tool can be used to begin a graceful shutdown of the XMS services followed by a restart
+
+By default the graceful shutdown timer is set to 6 mins, but this line `SHUTDOWNTIMER=360` in the script can be changed to the desired values
+
+The `gracefulRestart.log` will contain the details from the script execution.
+
+Usage:
+``` bash
+xms# ./gracefulRestart.sh  
+```
