@@ -167,5 +167,19 @@ xmsResources.xmsMediaTransactions = 0
 
 
 Network Error count: 0
+```
 
+### genXMScores.sh
+This bash script can be used to collect system level information and cores for the running XMS processes.
+
+By default it will create a directory named xmscores-YYY-MM-DD_hh-mm-ss and save in it the core files, executable binaries and xmsinfo output.
+
+The script will also try and obtain the backtrace for each of the core files and will save it to `corebtinfo.log`
+
+
+_Note: It is recommended that this script be run with root access either as root account or via sudo_
+
+Usage:
+``` bash
+xms# ./genXMScores.sh  
 ```
