@@ -66,10 +66,11 @@ do
 	    echo -e $looptime stamp "----------------"  > tmpps.txt
 	    ps -A  -Lo %cpu,pid,lwp,comm=,args >> tmpps.txt
 	    
-        echo -e "\n\nCPU Intensive Threads"
-	      grep '^ *[0-9][0-9][0-9]\.' tmpps.txt
-          grep '^ *[2-9][0-9]\.' tmpps.txt
-          echo -e "\n\nTop Info:"
+        echo -e "\n\nCPU Intensive Threads:"
+	      grep -P '^ *[0-9][0-9][0-9]\.' tmpps.txt
+          grep -P '^ *[4-9][0-9]\.' tmpps.txt
+          
+        echo -e "\n\nTop Info:"
           grep Cpu tmptop.txt 
           grep Mem: tmptop.txt
           grep Swap: tmptop.txt

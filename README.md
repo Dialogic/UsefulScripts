@@ -129,3 +129,43 @@ xms# nohup ./monitor.sh > /dev/null &
 ```
 
 Sample output:
+``` bash
+16-06-05_19:55:28.501 - xms [1 out of 240]
+Disk/Mem Usage:
+             total       used       free     shared    buffers     cached
+Mem:          7824       5052       2771         11          0       3102
+-/+ buffers/cache:       1949       5874
+Swap:         8079          0       8079
+
+CPU Intensive Threads:
+
+Top Info:
+%Cpu(s):  0.7 us,  6.1 sy,  0.0 ni, 93.0 id,  0.0 wa,  0.0 hi,  0.1 si,  0.0 st
+KiB Mem:   8011996 total,  5175232 used,  2836764 free,      752 buffers
+KiB Swap:  8273916 total,        0 used,  8273916 free.  3176904 cached Mem
+
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+10007 root      rt   0 2652480 646256 121436 S   0.0  8.1 709:54.20 ssp_x86Linux_bo
+12532 root      20   0  187424   2324   1896 S   0.0  0.0   0:46.40 appmanager
+12509 root      20   0  316604  48432  17000 S   0.0  0.6  52:24.44 xmserver
+12698 root      20   0 1524784   5216   3312 S   0.0  0.1  10:23.55 msml_main
+12692 root      20   0 2525180  25344   7452 S   6.5  0.3  26:12.17 vxmlinterpreter
+12546 root      20   0 1639812   4848   3976 S   0.0  0.1   7:02.31 xmsrest
+12576 root      20   0  177616   1644   1332 S   0.0  0.0   7:00.27 netann
+12514 root      20   0  170116   2504   1536 S   0.0  0.0   0:00.00 httpclient
+12598 root      20   0  170116   2500   1536 S   0.0  0.0   0:00.00 httpclient
+12850 root      20   0  170116   2504   1536 S   0.0  0.0   0:00.00 httpclient
+
+
+Meters(if available):
+xmsResources.xmsRtpSessions = 0
+xmsResources.xmsSignalingSessions = 0
+msml.resources.calls.active = 0
+msml.resources.xmscalls.active = 0
+xmsResources.xmsMediaTransactions = 0
+
+
+Network Error count: 0
+
+```
