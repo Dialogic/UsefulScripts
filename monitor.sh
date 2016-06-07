@@ -11,7 +11,7 @@ function onExit() {
     echo "Exit Trap Received"
     echo "Generating final tgz monitor-$starttime-final.tgz"
 	sar -A > sar-output.txt
-    tar cvzf "monitor-$starttime-final.tgz" *-output.txt
+    tar cvzf "monitor-$starttime-final.tgz" *-output.txt /var/lib/xms/meters/rrd /var/log/messages
     echo 'Clearing temp files'
        rm -f tmptop.txt
        rm -f tmpps.txt
@@ -136,7 +136,7 @@ do
 
 	sar -A > sar-output.txt
 
-    tar cvzf "monitor-$starttime.tgz" *-output.txt
+    tar cvzf "monitor-$starttime.tgz" *-output.txt /var/lib/xms/meters/rrd /var/log/messages
     #delete files over 7 days old   
     find . -name 'monitor-*.tgz' -mtime +7 -delete
 done
