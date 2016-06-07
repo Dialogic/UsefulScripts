@@ -11,7 +11,7 @@ function onExit() {
     echo "Exit Trap Received"
     echo "Generating final tgz monitor-$starttime-final.tgz"
 	sar -A > sar-output.txt
-    tar cvzf "monitor-$starttime-final.tgz" *-output.txt /var/lib/xms/meters/rrd /var/log/messages
+    tar cvzf "monitor-$starttime-final.tgz" *-output.txt /var/lib/xms/meters/rrd /var/log/messages &> /dev/null
     echo 'Clearing temp files'
        rm -f tmptop.txt
        rm -f tmpps.txt
@@ -63,7 +63,7 @@ do
 
         top -b -n 1  > tmptop.txt
         
-	    echo -e $looptime stamp "----------------"  > tmpps.txt
+	    echo -e $looptimestamp stamp "----------------"  > tmpps.txt
 	    ps -A  -Lo %cpu,pid,lwp,comm=,args >> tmpps.txt
 	    
         echo -e "\n\nCPU Intensive Threads:"
@@ -111,14 +111,14 @@ do
             cat /dev/null > tmp-network.txt
         fi
         
-        echo -e  "\n$looptime-$hostname\n" >> top-output.txt
+        echo -e  "\n$looptimestamp-$hostname\n" >> top-output.txt
         cat tmptop.txt >> top-output.txt
-        echo -e  "\n$looptime-$hostname\n" >> ps-output.txt
+        echo -e  "\n$looptimestamp-$hostname\n" >> ps-output.txt
 	    cat tmpps.txt >> ps-output.txt
-        echo -e "\n$looptime-$hostname\n" >> meters-output.txt
+        echo -e "\n$looptimestamp-$hostname\n" >> meters-output.txt
         cat /var/lib/xms/meters/currentValue.txt >> meters-output.txt
        
-        echo -e  "\n$looptime-$hostname\n" >> topthreads-output.txt
+        echo -e  "\n$looptimestamp-$hostname\n" >> topthreads-output.txt
         top -b -n 1 -H >> topthreads-output.txt
 	
         
