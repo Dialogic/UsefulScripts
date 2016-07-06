@@ -10,9 +10,12 @@ ls -lR /usr/dialogic > /var/log/xms/dirlisting.out
 
 
 touch /var/log/xms/additionalinfo.out
-echo "" > /var/log/xms/additionalinfo.out
 
-
+echo "$starttime" > /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+echo "hostname" >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+hostname >> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
 echo "ifconfig" >> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
@@ -90,6 +93,10 @@ echo "/etc/system-release" >> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
 cat /etc/system-release >> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+echo "/etc/redhat-release" >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+cat /etc/redhat-release >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
 echo "cron tasks" >> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
 crontab -l >> /var/log/xms/additionalinfo.out
@@ -114,12 +121,29 @@ echo "--------------------------------------------------------------------------
 echo "dmidecode " >> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
 dmidecode  >> /var/log/xms/additionalinfo.out
-
-
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+echo "systemctl list-unit-files " >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+systemctl list-unit-files  >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+echo "chkconfig --list " >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+chkconfig --list  >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+echo "dmesg " >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+dmesg  >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+echo "ulimit -a " >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+ulimit -a  >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+echo "uname -a " >> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" >> /var/log/xms/additionalinfo.out
+uname -a  >> /var/log/xms/additionalinfo.out
 
 touch /var/log/xms/webuiinfo.out
 echo "" > /var/log/xms/webuiinfo.out
-
 #echo "############################################################################" >> /var/log/xms/webuiinfo.out
 #echo "WebUI" >> /var/log/xms/webuiinfo.out
 #echo "############################################################################" >> /var/log/xms/webuiinfo.out
@@ -171,7 +195,7 @@ echo -e "OAM:       http://$OAMHOST:$OAMPORT" >> /var/log/xms/webuiinfo.out
 echo -e "starttime: $starttime" >> /var/log/xms/webuiinfo.out
 echo -e "Outfile:   $OUTFILE" >> /var/log/xms/webuiinfo.out
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" >> /var/log/xms/webuiinfo.out
-dumpsubs "" 
+dumpsubs ""
 
 
 
@@ -197,10 +221,41 @@ find / -type f -size -16c -name '*.wav' -printf "%p  - %c - %k KB\n"  >> /var/lo
 
 echo "----------------------------------------------------------------------------" >> /var/log/xms/mediafileinfo.out
 echo All Files >> /var/log/xms/mediafileinfo.out
-echo "----------------------------------------------------------------------------" >> /var/log/xms/mediafileinfo.out 
+echo "----------------------------------------------------------------------------" >> /var/log/xms/mediafileinfo.out
 find / -type f -name '*.amr' -exec ls -al {} \;  >> /var/log/xms/mediafileinfo.out
 
-tar cvzf $OUTFILE --exclude='*.tgz' /var/log/xms /var/log/dialogic /var/log/messages /etc/profile.d/ct_intel.sh /boot/grub/menu.lst /etc/xms /usr/dialogic/cfg /etc/hosts /var/lib/xms/meters/currentValue.txt
+echo "Listing:" >> /var/log/xms/abrtinfo.out
+ls -altr /var/tmp/abrt >> /var/log/xms/abrtinfo.out
+echo "last-ccpp:" >> /var/log/xms/abrtinfo.out
+cat /var/tmp/abrt/last-ccpp >> /var/log/xms/abrtinfo.out
+echo "" >> /var/log/xms/abrtinfo.out
+
+for filename in /var/tmp/abrt/*; do
+if [ -d $filename ]
+then
+        echo "======================== START ================================" >> /var/log/xms/abrtinfo.out
+        echo "$filename" >> /var/log/xms/abrtinfo.out
+        echo "===============================================================" >> /var/log/xms/abrtinfo.out
+        echo "                     EXECUTABLE                                " >> /var/log/xms/abrtinfo.out
+        echo "---------------------------------------------------------------" >> /var/log/xms/abrtinfo.out
+        cat $filename/executable >> /var/log/xms/abrtinfo.out
+        echo "" >> /var/log/xms/abrtinfo.out
+        echo "---------------------------------------------------------------" >> /var/log/xms/abrtinfo.out
+        echo "                      REASON                                   " >> /var/log/xms/abrtinfo.out
+        echo "---------------------------------------------------------------" >> /var/log/xms/abrtinfo.out
+        cat $filename/reason >> /var/log/xms/abrtinfo.out
+        echo "" >> /var/log/xms/abrtinfo.out
+        echo "---------------------------------------------------------------" >> /var/log/xms/abrtinfo.out
+        echo "                     BACKTRACE                                 " >> /var/log/xms/abrtinfo.out
+        echo "---------------------------------------------------------------" >> /var/log/xms/abrtinfo.out
+        cat $filename/core_backtrace >> /var/log/xms/abrtinfo.out
+        echo "" >> /var/log/xms/abrtinfo.out
+        echo "===============================================================" >> /var/log/xms/abrtinfo.out
+        echo "$filename" >> /var/log/xms/abrtinfo.out
+        echo "=====================i===  END  ===============================" >> /var/log/xms/abrtinfo.out
+fi
+done
+
+tar cvzf $OUTFILE --exclude='*.tgz' /var/log/xms /var/log/dialogic /var/log/messages /etc/profile.d/ct_intel.sh /boot/grub/menu.lst /etc/xms /usr/dialogic/cfg /etc/hosts /var/lib/xms/meters/currentValue.txt /etc/fstab /etc/cluster/cluster.conf /etc/sysctl.conf /etc/sysconfig &> /dev/null
 
 echo -e "\n\n File saved to $OUTFILE\n\n"
-
