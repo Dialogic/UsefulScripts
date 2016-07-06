@@ -4,7 +4,7 @@
 # License information and the latest version of this script can be found at
 # https://github.com/Dialogic/UsefulScripts
 # or run directly by Executing
-# curl -s https://github.com/Dialogic/UsefulScripts/blob/master/xmsinfo.sh | bash -
+# curl -s https://raw.githubusercontent.com/Dialogic/UsefulScripts/master/xmsinfo.sh | bash -
 . /etc/init.d/functions
 
 starttime=`date +"%Y-%m-%d_%H-%M-%S"`
