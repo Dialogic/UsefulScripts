@@ -160,6 +160,11 @@ echo "sar -A" &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 sar -A &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+echo "High usage processes " &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+ps -eo %cpu,pid,command --sort -%cpu | head -10 &>> /var/log/xms/additionalinfo.out
+ps -eo size,%mem,pid,command --sort -size | head -20 &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 echo "proc/meminfo" &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 cat /proc/meminfo &>> /var/log/xms/additionalinfo.out
@@ -223,6 +228,7 @@ echo "--------------------------------------------------------------------------
 echo "uname -a " &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 uname -a  &>> /var/log/xms/additionalinfo.out
+
 setpass;
 next
 
