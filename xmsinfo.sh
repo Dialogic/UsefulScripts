@@ -357,7 +357,7 @@ setpass;
 next 
 
 step "Compressing system and XMS debug logs"
-tar cvzf $OUTFILE --exclude='*.tgz' --exclude='xmsbackup*.tar.gz' /var/log/xms /var/log/dialogic /var/log/messages* /etc/profile.d/ct_intel.sh /etc/xms /usr/dialogic/cfg /etc/hosts /var/lib/xms/meters /etc/fstab /etc/cluster/cluster.conf /etc/sysctl.conf /etc/sysconfig &>/dev/null
+tar cvzf $OUTFILE --exclude='*.tgz' --exclude='xmsbackup*.tar.gz' /var/log/xms /var/log/dialogic /var/log/messages* /etc/profile.d/ct_intel.sh /etc/xms /usr/dialogic/cfg /etc/hosts /var/lib/xms/meters /etc/fstab /etc/cluster/cluster.conf /etc/sysctl.conf /etc/sysconfig /var/lib/xms/cdrdatabase &>/dev/null
 setpass;
 next
 
