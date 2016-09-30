@@ -201,6 +201,10 @@ echo "ethtool --show-offload" &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 for nic in `ls /sys/class/net` ; do ethtool --show-offload $nic; done &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+echo "ethtool --show-ring" &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+for nic in `ls /sys/class/net` ; do ethtool --show-ring $nic; done &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 echo "lspci" &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 lspci &>> /var/log/xms/additionalinfo.out
