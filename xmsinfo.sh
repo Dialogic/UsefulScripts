@@ -98,6 +98,16 @@ echo "--------------------------------------------------------------------------
 echo "route" &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 route &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+echo "netstat -rn" &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+netstat -rn &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+echo "ip route show all" &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+ip route show all  
+&>> /var/log/xms/additionalinfo.out
+
 setpass;
 next
 
@@ -332,7 +342,7 @@ echo "last-ccpp:" &>> /var/log/xms/abrtinfo.out
 cat /var/tmp/abrt/last-ccpp &>> /var/log/xms/abrtinfo.out
 echo "" &>> /var/log/xms/abrtinfo.out
 
-for filename in /var/tmp/abrt/*; do
+for filename in /var/tmp/abrt/* /var/spoo/abrt/* ; do
 if [ -d $filename ]
 then
         echo "======================== START ================================" &>> /var/log/xms/abrtinfo.out
