@@ -342,7 +342,7 @@ echo "last-ccpp:" &>> /var/log/xms/abrtinfo.out
 cat /var/tmp/abrt/last-ccpp &>> /var/log/xms/abrtinfo.out
 echo "" &>> /var/log/xms/abrtinfo.out
 
-for filename in /var/tmp/abrt/* /var/spoo/abrt/* ; do
+for filename in /var/tmp/abrt/* /var/spool/abrt/* ; do
 if [ -d $filename ]
 then
         echo "======================== START ================================" &>> /var/log/xms/abrtinfo.out
