@@ -141,6 +141,10 @@ echo "rpm -qa" &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 rpm -qa &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+echo "yum repolist" &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+yum repolist &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 echo "cron tasks" &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 crontab -l &>> /var/log/xms/additionalinfo.out
@@ -242,41 +246,24 @@ echo "--------------------------------------------------------------------------
 echo "uname -a " &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 uname -a  &>> /var/log/xms/additionalinfo.out
-
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+echo "cpupower " &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/
+cpupower  frequency-info &>> /var/log/xms/additionalinfo.out
+cpupower  idle-info &>> /var/log/xms/additionalinfo.out
+cpupower  info &>> /var/log/xms/additionalinfo.out
+cpupower  monitor &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+echo "Clock Sources " &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/
+echo "Available Clock sources: $(cat /sys/devices/system/clocksource/clocksource0/available_clocksource )"
+echo "Current Clock sources: $(cat /sys/devices/system/clocksource/clocksource0/current_clocksource )"
 setpass;
 next
 
 step "Collecting XMS WebUI information"
 touch /var/log/xms/webuiinfo.out
 echo "" > /var/log/xms/webuiinfo.out
-#echo "############################################################################" &>> /var/log/xms/webuiinfo.out
-#echo "WebUI" &>> /var/log/xms/webuiinfo.out
-#echo "############################################################################" &>> /var/log/xms/webuiinfo.out
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/system &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/system/network &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/system/network/eth0 &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/license &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/codecs &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/services &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/sip &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/routing &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/rtp &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/msml &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/mrcpclient &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
-#curl http://127.0.0.1:10080/httpclient &>> /var/log/xms/webuiinfo.out 2> /dev/null
-#echo "----------------------------------------------------------------------------" &>> /var/log/xms/webuiinfo.out
 OAMHOST="127.0.0.1"
 OAMPORT="10080"
 dumpsubs(){
@@ -322,16 +309,16 @@ echo Media Files &>> /var/log/xms/mediafileinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/mediafileinfo.out
 find /var/lib/xms/media -type f -name '*' -exec ls -al {} \; &>> /var/log/xms/mediafileinfo.out
 
-echo "----------------------------------------------------------------------------" &>> /var/log/xms/mediafileinfo.out
-echo Small Files &>> /var/log/xms/mediafileinfo.out
-echo "----------------------------------------------------------------------------" &>> /var/log/xms/mediafileinfo.out
-find / -type f -size -16c -name '*.amr' -printf "%p  - %c - %k KB\n"  &>> /var/log/xms/webuiinfo.out
-find / -type f -size -16c -name '*.wav' -printf "%p  - %c - %k KB\n"  &>> /var/log/xms/webuiinfo.out
+#echo "----------------------------------------------------------------------------" &>> /var/log/xms/mediafileinfo.out
+#echo Small Files &>> /var/log/xms/mediafileinfo.out
+#echo "----------------------------------------------------------------------------" &>> /var/log/xms/mediafileinfo.out
+#find / -type f -size -16c -name '*.amr' -printf "%p  - %c - %k KB\n"  &>> /var/log/xms/webuiinfo.out
+#find / -type f -size -16c -name '*.wav' -printf "%p  - %c - %k KB\n"  &>> /var/log/xms/webuiinfo.out
 
-echo "----------------------------------------------------------------------------" &>> /var/log/xms/mediafileinfo.out
-echo All Files &>> /var/log/xms/mediafileinfo.out
-echo "----------------------------------------------------------------------------" &>> /var/log/xms/mediafileinfo.out
-find / -type f -name '*.amr' -exec ls -al {} \;  &>> /var/log/xms/mediafileinfo.out
+#echo "----------------------------------------------------------------------------" &>> /var/log/xms/mediafileinfo.out
+#echo All Files &>> /var/log/xms/mediafileinfo.out
+#echo "----------------------------------------------------------------------------" &>> /var/log/xms/mediafileinfo.out
+#find / -type f -name '*.amr' -exec ls -al {} \;  &>> /var/log/xms/mediafileinfo.out
 setpass;
 next
 
@@ -370,8 +357,95 @@ done
 setpass;
 next 
 
+step "Quick Audit of frequent mis-configured data" &>> /var/log/xms/quickaudit.out 
+echo "Audit of $(hostname) performed on $(date +"%Y-%m-%d_%H-%M-%S") " &> /var/log/xms/quickaudit.out 
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " Host Info" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+hostnamectl &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " XMS Info" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+curl -s http://127.0.0.1:10080/system >> /var/log/xms/quickaudit.out
+curl -s http://127.0.0.1:10080/license >> /var/log/xms/quickaudit.out
+curl -s http://127.0.0.1:10080/resource/active >> /var/log/xms/quickaudit.out
+echo &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " CPU Info" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+lscpu | grep -P "^CPU\\(s\\):" &>> /var/log/xms/quickaudit.out
+lscpu | grep -P "^Thread\\(s\\) per core:" &>> /var/log/xms/quickaudit.out
+lscpu | grep -P "Model name:" &>> /var/log/xms/quickaudit.out
+cat /sys/module/intel_idle/parameters/max_cstate | xargs echo "Max C-Stats Set to: " &>> /var/log/xms/quickaudit.out
+cpupower frequency-info | grep Active | xargs echo CPU Turbo boost &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " Memory Info" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+cat /proc/meminfo | grep -P "MemTotal:" &>> /var/log/xms/quickaudit.out
+cat /proc/meminfo | grep -P "MemFree:" &>> /var/log/xms/quickaudit.out
+cat /proc/meminfo | grep -P "MemAvailable:" &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " Partition Info" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+df &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " Misc Package Info" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+yum -q list installed openssl | tail -1 | xargs echo Openssl version is &>> /var/log/xms/quickaudit.out
+yum -q list installed js | tail -1 | xargs echo js version is &>> /var/log/xms/quickaudit.out
+sestatus | xargs echo &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " RTP PORT Info" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo "Audio Port Range: $(grep -hoP "0x4005,[0-9]*" /usr/dialogic/data/Hmp.Uconfig || echo "default (49152)")" &>> /var/log/xms/quickaudit.out
+echo "Video Port Range: $(grep -hoP "0x4006,[0-9]*" /usr/dialogic/data/Hmp.Uconfig || echo "default (57344)")" &>> /var/log/xms/quickaudit.out
+sysctl -A | grep ip_local_reserved_ports | cut -d"=" -f 2 | xargs echo "Ephermeral Port Range set to" &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " hosts file" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+cat /etc/hosts &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " Misc System Settings" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo "Available Clock sources: $(cat /sys/devices/system/clocksource/clocksource0/available_clocksource )" &>> /var/log/xms/quickaudit.out
+echo "Current Clock sources: $(cat /sys/devices/system/clocksource/clocksource0/current_clocksource )" &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+timedatectl | grep "NTP enabled" | tr -d " " | cut -d":" -f2 | xargs echo "NTP Enabled: " &>> /var/log/xms/quickaudit.out
+timedatectl | grep "NTP enabled" | tr -d " " | cut -d":" -f2 | xargs echo "NTP Syncronized: "  &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " rp_filter" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+sysctl -A | grep '.rp_filter' &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " Network Settings and Tuning" >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+ip a  &>> /var/log/xms/quickaudit.out
+netstat -s &>> /var/log/xms/quickaudit.out
+ip -s link | grep -oP "qlen \\d*" | xargs echo "Network" &>> /var/log/xms/quickaudit.out
+echo "Checking the softirq - All columns should increase" &>> /var/log/xms/quickaudit.out
+grep RX /proc/softirqs | cut -d":" -f2- | xargs echo &>> /var/log/xms/quickaudit.out
+sleep 5 ;
+grep RX /proc/softirqs| cut -d":" -f2- | xargs echo &>> /var/log/xms/quickaudit.out
+echo "Checking interrupts - All CPU columns should increase" &>> /var/log/xms/quickaudit.out
+interfaces=$(ls  /sys/class/net | sed "s/lo//g" |xargs)
+cat /proc/interrupts | head -1 &>> /var/log/xms/quickaudit.out
+for interface in $interfaces; do cat /proc/interrupts | grep $interface ;done &>> /var/log/xms/quickaudit.out
+for interface in $interfaces; do cat /proc/interrupts | grep $interface ;done &>> /var/log/xms/quickaudit.out
+echo &>> /var/log/xms/quickaudit.out
+for interface in $interfaces; do ethtool -a $interface ;ethtool -c $interface | grep -P "(Adaptive|Coalesce)"; ethtool -g $interface; done &>> /var/log/xms/quickaudit.out
+for interface in $interfaces; do echo $interface Rx Errors ; ethtool -S $interface | grep rx_.*_errors | tr -s " ";done &>> /var/log/xms/quickaudit.out
+echo &>> /var/log/xms/quickaudit.out
+for interface in $interfaces; do echo $interface Rx Errors ; ethtool -S $interface | grep tx_.*_errors | tr -s " ";done &>> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+echo " top " >> /var/log/xms/quickaudit.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/quickaudit.out
+top -b -n 1 &>> /var/log/xms/quickaudit.out
+setpass;
+next
+
 step "Compressing system and XMS debug logs"
-tar cvzf $OUTFILE --exclude='*.tgz' --exclude='xmsbackup*.tar.gz' /var/log/xms /var/log/dialogic /var/log/messages* /etc/profile.d/ct_intel.sh /etc/xms /usr/dialogic/cfg /etc/hosts /var/lib/xms/meters /etc/fstab /etc/cluster/cluster.conf /etc/sysctl.conf /etc/sysconfig /var/lib/xms/cdrdatabase &>/dev/null
+tar cvzf $OUTFILE --exclude='*.tgz' --exclude='xmsbackup*.tar.gz' /var/log/xms /var/log/dialogic /var/log/messages* /etc/profile.d/ct_intel.sh /etc/xms /usr/dialogic/cfg /etc/hosts /var/lib/xms/meters /etc/fstab /etc/cluster/cluster.conf /etc/sysctl.conf /etc/sysconfig /var/lib/xms/cdrdatabase /usr/dialogic/data/Hmp.Uconfig /etc/httpd/conf.d/xms/conf &>/dev/null
+
 setpass;
 next
 
