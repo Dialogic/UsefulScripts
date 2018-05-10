@@ -256,8 +256,8 @@ cpupower  monitor &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 echo "Clock Sources " &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
-echo "Available Clock sources: $(cat /sys/devices/system/clocksource/clocksource0/available_clocksource )"
-echo "Current Clock sources: $(cat /sys/devices/system/clocksource/clocksource0/current_clocksource )"
+echo "Available Clock sources: $(cat /sys/devices/system/clocksource/clocksource0/available_clocksource )" &>> /var/log/xms/additionalinfo.out
+echo "Current Clock sources: $(cat /sys/devices/system/clocksource/clocksource0/current_clocksource )" &>> /var/log/xms/additionalinfo.out
 setpass;
 next
 
