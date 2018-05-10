@@ -103,6 +103,10 @@ echo "netstat -rn" &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 netstat -rn &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+echo "netstat -s" &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
+netstat -rn &>> /var/log/xms/additionalinfo.out
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 echo "ip route show all" &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 ip route show all  &>> /var/log/xms/additionalinfo.out
@@ -322,6 +326,20 @@ find /var/lib/xms/media -type f -name '*' -exec ls -al {} \; &>> /var/log/xms/me
 setpass;
 next
 
+step "Looking for XMS install logs"
+echo Install Logs: &> /var/log/xms/installlogs.out
+echo $installlogs &>> /var/log/xms/installlogs.out
+echo >> /var/log/xms/installlogs.out
+for log in $(echo $installlogs | xargs) ; do
+echo "--------------------------------------------------------------------------------" >> /var/log/xms/installlogs.out ;
+echo $log >> /var/log/xms/installlogs.out;
+echo "--------------------------------------------------------------------------------" >> /var/log/xms/installlogs.out ;
+cat $log >> /var/log/xms/installlogs.out ;
+echo "--------------------------------------------------------------------------------" >> /var/log/xms/installlogs.out ;
+done
+setpass
+next
+
 step "Collecting XMS core dump information"
 echo "Listing:" &>> /var/log/xms/abrtinfo.out
 ls -altr /var/tmp/abrt &>> /var/log/xms/abrtinfo.out
@@ -444,7 +462,7 @@ setpass;
 next
 
 step "Compressing system and XMS debug logs"
-tar cvzf $OUTFILE --exclude='*.tgz' --exclude='xmsbackup*.tar.gz' /var/log/xms /var/log/dialogic /var/log/messages* /etc/profile.d/ct_intel.sh /etc/xms /usr/dialogic/cfg /etc/hosts /var/lib/xms/meters /etc/fstab /etc/cluster/cluster.conf /etc/sysctl.conf /etc/sysconfig /var/lib/xms/cdrdatabase /usr/dialogic/data/Hmp.Uconfig /etc/httpd/conf.d/xms/conf &>/dev/null
+tar cvzf $OUTFILE --exclude='*.tgz' --exclude='xmsbackup*.tar.gz' /var/log/xms /var/log/dialogic /var/log/messages* /etc/profile.d/ct_intel.sh /etc/xms /usr/dialogic/cfg /etc/hosts /var/lib/xms/meters /etc/fstab /etc/cluster/cluster.conf /etc/sysctl.conf /etc/sysconfig /var/lib/xms/cdrdatabase /usr/dialogic/data/Hmp.Uconfig /etc/httpd/conf.d/xms/conf /var/cache/xms/http/xmserver/http.cache /etc/sysconfig/adaptor.properties $(echo $installlogs | xargs) &>/dev/null
 
 setpass;
 next
