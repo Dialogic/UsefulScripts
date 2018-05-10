@@ -248,14 +248,14 @@ echo "--------------------------------------------------------------------------
 uname -a  &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 echo "cpupower " &>> /var/log/xms/additionalinfo.out
-echo "----------------------------------------------------------------------------" &>> /var/
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 cpupower  frequency-info &>> /var/log/xms/additionalinfo.out
 cpupower  idle-info &>> /var/log/xms/additionalinfo.out
 cpupower  info &>> /var/log/xms/additionalinfo.out
 cpupower  monitor &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 echo "Clock Sources " &>> /var/log/xms/additionalinfo.out
-echo "----------------------------------------------------------------------------" &>> /var/
+echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 echo "Available Clock sources: $(cat /sys/devices/system/clocksource/clocksource0/available_clocksource )"
 echo "Current Clock sources: $(cat /sys/devices/system/clocksource/clocksource0/current_clocksource )"
 setpass;
