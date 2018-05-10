@@ -105,7 +105,7 @@ netstat -rn &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
 echo "ip route show all" &>> /var/log/xms/additionalinfo.out
 echo "----------------------------------------------------------------------------" &>> /var/log/xms/additionalinfo.out
-ip route show all  
+ip route show all  &>> /var/log/xms/additionalinfo.out
 &>> /var/log/xms/additionalinfo.out
 
 setpass;
